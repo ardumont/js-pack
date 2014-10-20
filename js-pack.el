@@ -8,10 +8,10 @@
 (install-packs '(js2-mode
                  flymake-jslint))
 
-(require js2-mode)
+(require 'js2-mode)
 (require 'flymake-jslint)
 
-(add-hook 'js-mode-hook 'flymake-jslint-load)
+(add-hook 'js2-mode-hook 'flymake-jslint-load)
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
