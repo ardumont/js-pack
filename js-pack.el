@@ -5,8 +5,8 @@
 ;;; Code:
 
 (require 'install-packages-pack)
-(install-packs '(js2-mode
-                 flymake-jshint))
+(install-packages-pack/install-packs '(js2-mode
+                                       flymake-jshint))
 
 (require 'js2-mode)
 (require 'flymake-jshint)
