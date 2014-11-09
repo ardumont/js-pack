@@ -8,7 +8,8 @@
 (install-packages-pack/install-packs '(js2-mode
                                        flymake-jshint
                                        repl-toggle
-                                       nodejs-repl))
+                                       nodejs-repl
+                                       web-mode))
 
 (require 'js2-mode)
 (require 'flymake-jshint)
@@ -20,6 +21,9 @@
 
 (rtog/add-repl 'js2mode 'nodejs-repl)
 (setq rtog/goto-buffer-fun 'pop-to-buffer)
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html" . web-mode))
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
