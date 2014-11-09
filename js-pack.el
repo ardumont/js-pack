@@ -6,15 +6,15 @@
 
 (require 'install-packages-pack)
 (install-packages-pack/install-packs '(js2-mode
-                                       flymake-jshint
+                                       flycheck
                                        repl-toggle
                                        nodejs-repl
                                        web-mode))
 
 (require 'js2-mode)
-(require 'flymake-jshint)
 
-(add-hook 'js2-mode-hook 'flymake-jshint-load)j
+(require 'flycheck)
+(add-hook 'js2-mode-hook 'flycheck-mode)
 
 (require 'nodejs-repl)
 (require 'repl-toggle)
