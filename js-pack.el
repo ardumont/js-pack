@@ -19,7 +19,7 @@
 (require 'nodejs-repl)
 (require 'repl-toggle)
 
-(rtog/add-repl 'js2mode 'nodejs-repl)
+(rtog/add-repl 'js2-mode 'nodejs-repl)
 (setq rtog/goto-buffer-fun 'pop-to-buffer)
 
 (require 'web-mode)
