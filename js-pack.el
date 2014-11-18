@@ -9,7 +9,8 @@
                                        flycheck
                                        repl-toggle
                                        nodejs-repl
-                                       web-mode))
+                                       web-mode
+                                       smartscan))
 
 (require 'js2-mode)
 
@@ -24,6 +25,9 @@
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
+
+(require 'smartscan)
+(add-hook 'js2-mode-hook (lambda () (smartscan-mode 1)))
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
