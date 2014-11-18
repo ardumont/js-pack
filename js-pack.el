@@ -28,6 +28,7 @@
 
 (require 'smartscan)
 (add-hook 'js2-mode-hook (lambda () (smartscan-mode 1)))
+(add-hook 'web-mode-hook (lambda () (smartscan-mode 1)))
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
