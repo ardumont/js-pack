@@ -27,8 +27,19 @@
 (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
 
 (require 'smartscan)
-(add-hook 'js2-mode-hook (lambda () (smartscan-mode 1)))
-(add-hook 'web-mode-hook (lambda () (smartscan-mode 1)))
+
+(defun js-pack/hook ()
+  "Default js hook function."
+  (interactive)
+  ;; (setq-local indent-tabs-mode t)
+  ;; (setq-local tab-width 4)
+  (smartscan-mode 1))
+
+;; (setq js2-mode-hook '(flycheck-mode #[nil "\300\301!\207" [run-hooks prelude-js-mode-hook] 2] er/add-js2-mode-expansions er/add-js-mode-expansions))
+;; (setq web-mode-hook '(er/add-web-mode-expansions er/add-html-mode-expansions))
+
+(add-hook 'js2-mode-hook 'js-pack/hook)
+(add-hook 'web-mode-hook 'js-pack/hook)
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
