@@ -10,7 +10,8 @@
                                        repl-toggle
                                        nodejs-repl
                                        web-mode
-                                       smartscan))
+                                       smartscan
+                                       js2-refactor))
 
 (require 'js2-mode)
 
@@ -40,6 +41,10 @@
 
 (add-hook 'js2-mode-hook 'js-pack/hook)
 (add-hook 'web-mode-hook 'js-pack/hook)
+
+(require 'js2-refactor)
+
+(js2r-add-keybindings-with-prefix "C-c C-j")
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
