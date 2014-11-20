@@ -8,22 +8,18 @@
 (install-packages-pack/install-packs '(js2-mode
                                        flycheck
                                        repl-toggle
-                                       nodejs-repl
+                                       ;; nodejs-repl
                                        web-mode
                                        smartscan
-                                       js2-refactor))
+                                       js2-refactor
+                                       skewer-mode))
 
 (require 'js2-mode)
 
 (require 'flycheck)
 (add-hook 'js2-mode-hook 'flycheck-mode)
 
-(require 'nodejs-repl)
-(require 'repl-toggle)
-
-(rtog/add-repl 'js2-mode 'nodejs-repl)
-(setq rtog/goto-buffer-fun 'pop-to-buffer)
-
+;; (require 'nodejs-repl)
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
 
@@ -45,6 +41,15 @@
 (require 'js2-refactor)
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
+
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'html-mode-hook 'skewer-html-mode)
+
+(require 'repl-toggle)
+
+(rtog/add-repl 'js2-mode 'skewer-repl)
+(setq rtog/goto-buffer-fun 'pop-to-buffer)
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
