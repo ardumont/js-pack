@@ -12,7 +12,8 @@
                                        web-mode
                                        smartscan
                                        js2-refactor
-                                       skewer-mode))
+                                       skewer-mode
+                                       slime-js))
 
 (require 'js2-mode)
 
@@ -48,6 +49,20 @@
 
 (rtog/add-repl 'js2-mode 'skewer-repl)
 (setq rtog/goto-buffer-fun 'pop-to-buffer)
+
+;; swank-js/slime-js setup
+
+;; pre-requisite: install `'npm install swank-js`'
+
+(require 'slime-js)
+(add-hook 'js2-mode-hook (lambda () (slime-js-minor-mode 1)))
+
+(add-hook 'css-mode-hook
+          (lambda ()
+            (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
+            (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
+
+;; Now go: M-x slime-connect RET localhost RET 4005 RET
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
