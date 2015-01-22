@@ -42,9 +42,7 @@
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
 
-(add-hook 'js2-mode-hook 'skewer-mode)
-(add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'html-mode-hook 'skewer-html-mode)
+(skewer-setup)
 
 (require 'repl-toggle)
 
