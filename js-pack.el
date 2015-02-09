@@ -4,6 +4,20 @@
 
 ;;; Code:
 
+;; slime deps
+
+;; when using the source git repository with the right slime version
+(add-to-list 'load-path "~/repo/perso/slime")
+(require 'slime-autoloads)
+(setq slime-contribs '(slime-fancy))
+
+(setq inferior-lisp-program "sbcl")
+
+(require 'slime)
+(slime-setup '(slime-js slime-repl))
+
+;; other deps
+
 (require 'install-packages-pack)
 (install-packages-pack/install-packs '(js2-mode
                                        flycheck
@@ -12,7 +26,7 @@
                                        web-mode
                                        smartscan
                                        js2-refactor
-                                       skewer-mode
+                                       ;; skewer-mode
                                        slime-js))
 
 (require 'js2-mode)
@@ -43,11 +57,13 @@
 
 (js2r-add-keybindings-with-prefix "C-c C-j")
 
-(skewer-setup)
-
 (require 'repl-toggle)
 
 (rtog/add-repl 'js2-mode 'skewer-repl)
+;; (require 'skewer)
+;; (skewer-setup)
+
+;; (rtog/add-repl 'js2-mode 'skewer-repl)
 (setq rtog/goto-buffer-fun 'pop-to-buffer)
 
 ;; swank-js/slime-js setup
@@ -63,6 +79,15 @@
             (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
 
 ;; Now go: M-x slime-connect RET localhost RET 4005 RET
+
+;; retrieved magnar's previous setup
+(load-file "./setup-slime-js.el")
+(require 'setup-slime-js)
+
+;; I run swank with npm
+(setq slime-js-swank-command "npm")
+(setq slime-js-swank-args '("run" "swank"))
+(setq slime-js-browser-command "firefox")
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
