@@ -65,23 +65,26 @@
 ;;             (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
 ;;             (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
 
-(setq inferior-js-program-command "node")
+;; 
+;; (setq inferior-js-program-command "node")
 
 ;;  Do: M-x run-js
 ;;  Away you go.
 
 ;; borrowed from @purcell - https://github.com/purcell/emacs.d/blob/master/lisp/init-javascript.el
 
-(defvar inferior-js-minor-mode-map (make-sparse-keymap))
-(define-key inferior-js-minor-mode-map "\C-x\C-e" 'js-send-last-sexp)
-(define-key inferior-js-minor-mode-map "\C-\M-x" 'js-send-last-sexp-and-go)
-(define-key inferior-js-minor-mode-map "\C-cb" 'js-send-buffer)
-(define-key inferior-js-minor-mode-map "\C-c\C-b" 'js-send-buffer-and-go)
-(define-key inferior-js-minor-mode-map "\C-cl" 'js-load-file-and-go)
+(defvar inferior-js-minor-mode-map (let ((map (make-sparse-keymap)))
+                                     (define-key map "\C-x\C-e" 'js-send-last-sexp)
+                                     (define-key map "\C-\M-x"  'js-send-last-sexp-and-go)
+                                     (define-key map "\C-cb"    'js-send-buffer)
+                                     (define-key map "\C-c\C-b" 'js-send-buffer-and-go)
+                                     (define-key map "\C-cl"    'js-load-file-and-go)
+                                     map))
 
 (define-minor-mode inferior-js-keys-mode
   "Bindings for communicating with an inferior js interpreter."
-  nil " InfJS" inferior-js-minor-mode-map)
+  :lighter " InfJS"
+  :keymap inferior-js-minor-mode-map)
 
 (dolist (hook '(js2-mode-hook js-mode-hook))
   (add-hook hook 'inferior-js-keys-mode))
