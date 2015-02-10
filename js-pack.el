@@ -11,10 +11,11 @@
 (require 'slime-autoloads)
 (setq slime-contribs '(slime-fancy))
 
-(setq inferior-lisp-program "sbcl")
-
 (require 'slime)
 (slime-setup '(slime-js slime-repl))
+
+(setq inferior-lisp-program "sbcl")
+(setq slime-net-coding-system 'utf-8-unix)
 
 ;; other deps
 
