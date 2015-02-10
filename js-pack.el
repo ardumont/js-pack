@@ -76,8 +76,8 @@
 
 (add-hook 'css-mode-hook
           (lambda ()
-            (define-key css-mode-map "\M-\C-x" 'slime-js-refresh-css)
-            (define-key css-mode-map "\C-c\C-r" 'slime-js-embed-css)))
+            (define-key css-mode-map (kbd "C-M-x") 'slime-js-refresh-css)
+            (define-key css-mode-map (kbd "C-c C-c") 'slime-js-refresh-css)))
 
 ;; Now go: M-x slime-connect RET localhost RET 4005 RET
 
