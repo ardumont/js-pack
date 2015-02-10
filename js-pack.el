@@ -7,7 +7,7 @@
 ;; slime deps
 
 ;; when using the source git repository with the right slime version
-(add-to-list 'load-path "~/repo/perso/slime")
+(add-to-list 'load-path "../slime")
 (require 'slime-autoloads)
 (setq slime-contribs '(slime-fancy))
 
@@ -82,7 +82,7 @@
 ;; Now go: M-x slime-connect RET localhost RET 4005 RET
 
 ;; retrieved magnar's previous setup
-(load-file "./setup-slime-js.el")
+(load "./setup-slime-js.el")
 (require 'setup-slime-js)
 
 ;; I run swank with npm
