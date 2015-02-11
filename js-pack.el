@@ -85,9 +85,9 @@
 (load "./setup-slime-js.el")
 (require 'setup-slime-js)
 
-;; I run swank with npm
+;; Overwrite some some default from setup-slime-js
 (setq slime-js-swank-command "npm")
-(setq slime-js-swank-args '("run" "swank"))
+(setq slime-js-swank-args '("run" "swank")) ;; I run swank with npm from the current project
 (setq slime-js-browser-command "firefox")
 
 (defun js-pack/kill-interactive-buffer ()
