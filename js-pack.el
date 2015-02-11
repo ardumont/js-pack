@@ -94,5 +94,11 @@
   (interactive)
   (mapc #' kill-buffer '("*swank-js*" "*slime-events*" "*slime-repl JS*")))
 
+(add-hook 'slime-minor-mode-hook (lambda ()
+                                   (define-key slime-js-minor-mode-map (kbd "C-c M-j") 'slime-js-jack-in-node)
+                                   (define-key slime-js-minor-mode-map (kbd "C-c M-b") 'slime-js-jack-in-browser)
+                                   (define-key slime-js-minor-mode-map (kbd "C-c M-k") 'js-pack/kill-interactive-buffer)
+                                   (define-key slime-js-minor-mode-map (kbd "C-c r") 'slime-js-reload)))
+
 (provide 'js-pack)
 ;;; js-pack.el ends here
