@@ -60,7 +60,6 @@
 
 (require 'repl-toggle)
 
-(rtog/add-repl 'js2-mode 'skewer-repl)
 ;; (require 'skewer)
 ;; (skewer-setup)
 
