@@ -90,5 +90,10 @@
 (setq slime-js-swank-args '("run" "swank"))
 (setq slime-js-browser-command "firefox")
 
+(defun js-pack/kill-interactive-buffer ()
+  "Clean/Kill buffer relative to slime/swank js."
+  (interactive)
+  (mapc #' kill-buffer '("*swank-js*" "*slime-events*" "*slime-repl JS*")))
+
 (provide 'js-pack)
 ;;; js-pack.el ends here
