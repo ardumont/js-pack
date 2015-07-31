@@ -30,41 +30,38 @@
                                        ;; skewer-mode
                                        slime-js))
 
-(require 'js2-mode)
-
-(require 'flycheck)
-(add-hook 'js2-mode-hook 'flycheck-mode)
-
-;; (require 'nodejs-repl)
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html" . web-mode))
-
-(require 'smartscan)
+(use-package smartscan)
+(use-package flycheck)
 
 (defun js-pack/hook ()
   "Default js hook function."
   (interactive)
-  ;; (setq-local indent-tabs-mode t)
-  ;; (setq-local tab-width 4)
   (smartscan-mode 1))
 
-;; (setq js2-mode-hook '(flycheck-mode #[nil "\300\301!\207" [run-hooks prelude-js-mode-hook] 2] er/add-js2-mode-expansions er/add-js-mode-expansions))
-;; (setq web-mode-hook '(er/add-web-mode-expansions er/add-html-mode-expansions))
+(use-package js2-mode
+  :config
+  (add-hook 'js2-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'js-pack/hook))
 
-(add-hook 'js2-mode-hook 'js-pack/hook)
-(add-hook 'web-mode-hook 'js-pack/hook)
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
+  (add-hook 'web-mode-hook 'js-pack/hook))
 
-(require 'js2-refactor)
 
-(js2r-add-keybindings-with-prefix "C-c C-j")
 
-(require 'repl-toggle)
+(use-package js2-refactor
+  :config
+  (js2r-add-keybindings-with-prefix "C-c C-j"))
 
-;; (require 'skewer)
-;; (skewer-setup)
+(use-package repl-toggle
+  :config
+  (custom-set-variables '(rtog/goto-buffer-fun 'pop-to-buffer)))
 
-;; (rtog/add-repl 'js2-mode 'skewer-repl)
-(setq rtog/goto-buffer-fun 'pop-to-buffer)
+;; (use-package :skewer
+;;   :config
+;;   (skewer-setup)
+;;   (rtog/add-repl 'js2-mode 'skewer-repl))
 
 ;; swank-js/slime-js setup
 
@@ -80,26 +77,26 @@
 
 ;; Now go: M-x slime-connect RET localhost RET 4005 RET
 
-;; retrieved magnar's previous setup
-(load "./setup-slime-js.el")
-(require 'setup-slime-js)
-
-;; Overwrite some some default from setup-slime-js
-(setq slime-js-swank-command "npm")
-(setq slime-js-swank-args '("run" "swank")) ;; I run swank with npm from the current project
-(setq slime-js-browser-command "firefox")
-
 ;; I inject inside the `'slime-js namespace`'
 (defun slime-js-kill-interactive-buffer ()
   "Clean/Kill buffer relative to slime/swank js."
   (interactive)
   (mapc #' kill-buffer '("*swank-js*" "*slime-events*" "*slime-repl JS*")))
 
-(add-hook 'slime-js-minor-mode-hook (lambda ()
-                                      (define-key slime-js-minor-mode-map (kbd "C-c M-j") 'slime-js-jack-in-node)
-                                      (define-key slime-js-minor-mode-map (kbd "C-c M-b") 'slime-js-jack-in-browser)
-                                      (define-key slime-js-minor-mode-map (kbd "C-c M-k") 'slime-js-kill-interactive-buffer)
-                                      (define-key slime-js-minor-mode-map (kbd "C-c r") 'slime-js-reload)))
+;; retrieved magnar's previous setup
+(use-package setup-slime-js
+  :load-path "./setup-slime-js"
+  :config
+  ;; Overwrite some some default from setup-slime-js
+  (custom-set-variables '(slime-js-swank-command "npm")
+                        '(slime-js-swank-args '("run" "swank")) ;; I run swank with npm from the current project
+                        '(slime-js-browser-command "firefox"))
+
+  (add-hook 'slime-js-minor-mode-hook (lambda ()
+                                        (define-key slime-js-minor-mode-map (kbd "C-c M-j") 'slime-js-jack-in-node)
+                                        (define-key slime-js-minor-mode-map (kbd "C-c M-b") 'slime-js-jack-in-browser)
+                                        (define-key slime-js-minor-mode-map (kbd "C-c M-k") 'slime-js-kill-interactive-buffer)
+                                        (define-key slime-js-minor-mode-map (kbd "C-c r") 'slime-js-reload))))
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
