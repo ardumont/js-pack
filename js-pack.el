@@ -7,15 +7,15 @@
 ;; slime deps
 
 ;; when using the source git repository with the right slime version
-(add-to-list 'load-path "../slime")
-(require 'slime-autoloads)
-(setq slime-contribs '(slime-fancy))
+;; (add-to-list 'load-path "../slime")
+;; (require 'slime-autoloads)
+;; (setq slime-contribs '(slime-fancy))
 
-(require 'slime)
-(slime-setup '(slime-js slime-repl))
+;; (require 'slime)
+;; (slime-setup '(slime-js slime-repl))
 
-(setq inferior-lisp-program "sbcl")
-(setq slime-net-coding-system 'utf-8-unix)
+;; (setq inferior-lisp-program "sbcl")
+;; (setq slime-net-coding-system 'utf-8-unix)
 
 ;; other deps
 
@@ -28,7 +28,7 @@
                                        smartscan
                                        js2-refactor
                                        ;; skewer-mode
-                                       slime-js))
+                                       ;; slime-js))
 
 (use-package smartscan)
 (use-package flycheck)
@@ -48,8 +48,6 @@
   (add-to-list 'auto-mode-alist '("\\.html" . web-mode))
   (add-hook 'web-mode-hook 'js-pack/hook))
 
-
-
 (use-package js2-refactor
   :config
   (js2r-add-keybindings-with-prefix "C-c C-j"))
@@ -67,36 +65,36 @@
 
 ;; pre-requisite: install `'npm install swank-js`'
 
-(require 'slime-js)
-(add-hook 'js2-mode-hook (lambda () (slime-js-minor-mode 1)))
+;; (require 'slime-js)
+;; (add-hook 'js2-mode-hook (lambda () (slime-js-minor-mode 1)))
 
-(add-hook 'css-mode-hook
-          (lambda ()
-            (define-key css-mode-map (kbd "C-M-x") 'slime-js-refresh-css)
-            (define-key css-mode-map (kbd "C-c C-c") 'slime-js-refresh-css)))
+;; (add-hook 'css-mode-hook
+;;           (lambda ()
+;;             (define-key css-mode-map (kbd "C-M-x") 'slime-js-refresh-css)
+;;             (define-key css-mode-map (kbd "C-c C-c") 'slime-js-refresh-css)))
 
 ;; Now go: M-x slime-connect RET localhost RET 4005 RET
 
 ;; I inject inside the `'slime-js namespace`'
-(defun slime-js-kill-interactive-buffer ()
-  "Clean/Kill buffer relative to slime/swank js."
-  (interactive)
-  (mapc #' kill-buffer '("*swank-js*" "*slime-events*" "*slime-repl JS*")))
+;; (defun slime-js-kill-interactive-buffer ()
+;;   "Clean/Kill buffer relative to slime/swank js."
+;;   (interactive)
+;;   (mapc #' kill-buffer '("*swank-js*" "*slime-events*" "*slime-repl JS*")))
 
 ;; retrieved magnar's previous setup
-(use-package setup-slime-js
-  :load-path "./setup-slime-js"
-  :config
-  ;; Overwrite some some default from setup-slime-js
-  (custom-set-variables '(slime-js-swank-command "npm")
-                        '(slime-js-swank-args '("run" "swank")) ;; I run swank with npm from the current project
-                        '(slime-js-browser-command "firefox"))
+;; (use-package setup-slime-js
+;;   :load-path "./setup-slime-js.el"
+;;   :config
+;;   ;; Overwrite some some default from setup-slime-js
+;;   (custom-set-variables '(slime-js-swank-command "npm")
+;;                         '(slime-js-swank-args '("run" "swank")) ;; I run swank with npm from the current project
+;;                         '(slime-js-browser-command "firefox"))
 
-  (add-hook 'slime-js-minor-mode-hook (lambda ()
-                                        (define-key slime-js-minor-mode-map (kbd "C-c M-j") 'slime-js-jack-in-node)
-                                        (define-key slime-js-minor-mode-map (kbd "C-c M-b") 'slime-js-jack-in-browser)
-                                        (define-key slime-js-minor-mode-map (kbd "C-c M-k") 'slime-js-kill-interactive-buffer)
-                                        (define-key slime-js-minor-mode-map (kbd "C-c r") 'slime-js-reload))))
+;;   (add-hook 'slime-js-minor-mode-hook (lambda ()
+;;                                         (define-key slime-js-minor-mode-map (kbd "C-c M-j") 'slime-js-jack-in-node)
+;;                                         (define-key slime-js-minor-mode-map (kbd "C-c M-b") 'slime-js-jack-in-browser)
+;;                                         (define-key slime-js-minor-mode-map (kbd "C-c M-k") 'slime-js-kill-interactive-buffer)
+;;                                         (define-key slime-js-minor-mode-map (kbd "C-c r") 'slime-js-reload))))
 
 (provide 'js-pack)
 ;;; js-pack.el ends here
