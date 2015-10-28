@@ -22,7 +22,6 @@
 (require 'install-packages-pack)
 (install-packages-pack/install-packs '(js2-mode
                                        flycheck
-                                       repl-toggle
                                        ;; nodejs-repl
                                        web-mode
                                        smartscan
@@ -51,10 +50,6 @@
 (use-package js2-refactor
   :config
   (js2r-add-keybindings-with-prefix "C-c C-j"))
-
-(use-package repl-toggle
-  :config
-  (custom-set-variables '(rtog/goto-buffer-fun 'pop-to-buffer)))
 
 ;; (use-package :skewer
 ;;   :config
